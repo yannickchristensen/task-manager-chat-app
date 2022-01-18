@@ -81,13 +81,13 @@ addTaskForm.addEventListener('submit', (e) => {
     })
     .then(res => res.json())
     .then(data => {
-        //put data into an array as renderTasks takes an array
+        // put data into an array as renderTasks takes an array
         const dataArr = [];
         dataArr.push(data);
         renderTasks(dataArr)
     })
 
-    //Rest input fields
+    // reset input fields
     nameValue.value = '';
     descriptionValue.value = '';
 })

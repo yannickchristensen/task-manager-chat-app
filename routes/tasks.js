@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Task = require('../models/task')
 
-// Getting all
+// Gets all tasks
 router.get('/', async (req, res) => {
   try {
     const tasks = await Task.find()
@@ -12,12 +12,12 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Get task
+// Gets task
 router.get('/:id', getTask, (req, res) => {
   res.status(200).json(res.task)
 })
 
-// Creating one
+// Creates a task
 router.post('/', async (req, res) => {
   const task = new Task({
     name: req.body.name,
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// Updating One
+// Updates a task
 router.patch('/:id', getTask, async (req, res) => {
   if (req.body.name != null) {
     res.task.name = req.body.name
@@ -45,7 +45,7 @@ router.patch('/:id', getTask, async (req, res) => {
   }
 })
 
-// Deleting One
+// Deletes a task
 router.delete('/:id', getTask, async (req, res) => {
   try {
     await res.task.remove()
@@ -65,7 +65,6 @@ async function getTask(req, res, next) {
   } catch (err) {
     return res.status(500).json({ message: err.message })
   }
-
   res.task = task
   next()
 }
